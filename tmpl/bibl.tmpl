@@ -1,0 +1,35 @@
+[% INCLUDE header.tmpl title='' menu='bibl' %]
+[% IF default %]
+<h1>Publications</h1>
+<ul>
+<li><a href="/faddeev/bibl.cgi?type=books">Books</a></li>
+<li><a href="/faddeev/bibl.cgi?type=art">All articles</a></li>
+<li><a href="/faddeev/bibl.cgi?type=art&lang=ru" title="Russian articles">Russian articles</a></li>
+<li><a href="/faddeev/bibl.cgi?type=art&lang=en" title="English articles">English articles</a></li>
+<li><a href="/faddeev/bibl.cgi?type=sel" title="Selected works">Selected works</a> (not implemented yet)</li>
+</ul>
+[% ELSE %]
+<h1>List of publications</h1>
+
+[% SET prev_item = '' %]
+[% SET lcount = 0 %]
+<dl>
+[% FOREACH art IN articles %][% UNLESS prev_item == art.item %][% SET lcount = lcount + 1 %]</dl><dl>[[% lcount %]][% END %]
+<dt>[% art.item %]: [% art.author %], [% IF art.type == 2 %]<i>[% art.title %]</i>[% ELSE %]"[% art.title %]"[% END %],</dt>
+<dd>[% SET ec = 0 %]
+    [% FOREACH ed IN art.map_edition %][% ec = ec + 1 %]
+[% SET book = 0 %][% IF (art.type == 2 || ed.map_journal.type > 1) %][% SET book = 1 %][% END %]
+[% IF ec > 1 %]<br>[% END %]
+    [% IF book == 1 %][% IF ed.map_journal.name %][% ed.map_journal.name %],[% END %][% IF ed.map_journal.publisher %] [% ed.map_journal.publisher %],[% END %][% IF ed.map_journal.location %] [% ed.map_journal.location %],[% END %][% ed.vol _ ',' IF ed.vol %] [% ed.year %],
+    [% ELSE %]
+[% ed.map_journal.name %] <b>[% ed.issue %]</b> [% ed.vol IF ed.vol %] ([% ed.year %])
+    [% END %] [% ed.pages %][% IF art.arxiv %] ArXiv:[% art.arxiv %][% END %]
+    [% END %]
+</dd>
+[% SET prev_item = art.item %]
+[% END %]
+</dl>
+
+[% END %]
+
+[% INCLUDE footer.tmpl %]

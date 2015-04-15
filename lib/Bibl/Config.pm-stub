@@ -1,0 +1,16 @@
+package Bibl::Config;
+
+require Exporter;
+
+@ISA = qw(Exporter);
+@EXPORT_OK = qw($conf);
+
+our $conf = {
+    # database configuration
+    db_login    => 'XXXXXXXXX',
+    db_name     => 'XXXXXXXXX',
+    db_pass     => 'XXXXXXXXX',
+    db_host     => 'localhost',
+};
+
+1;
