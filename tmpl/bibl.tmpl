@@ -20,9 +20,9 @@
     [% FOREACH ed IN art.map_edition %][% ec = ec + 1 %]
 [% SET book = 0 %][% IF (art.type == 2 || ed.map_journal.type > 1) %][% SET book = 1 %][% END %]
 [% IF ec > 1 %]<br>[% END %]
-    [% IF book == 1 %][% IF ed.map_journal.name %][% ed.map_journal.name %],[% END %][% IF ed.map_journal.publisher %] [% ed.map_journal.publisher %],[% END %][% IF ed.map_journal.location %] [% ed.map_journal.location %],[% END %][% ed.vol _ ',' IF ed.vol %] [% ed.year %],
+    [% IF book == 1 %][% IF ed.map_journal.name %][% ed.map_journal.name %],[% END %][% IF ed.map_journal.publisher %] [% ed.map_journal.publisher %],[% END %][% IF ed.map_journal.location %] [% ed.map_journal.location %],[% END %][% ed.vol _ ',' IF ed.vol %] [% IF ed.year %][% ed.year %],[% END %]
     [% ELSE %]
-[% ed.map_journal.name %] <b>[% ed.issue %]</b> [% ed.vol IF ed.vol %] ([% ed.year %])
+[% ed.map_journal.name %] <b>[% ed.issue %]</b> [% ed.vol IF ed.vol %] [% IF ed.year %]([% ed.year %])[% END %]
     [% END %] [% ed.pages %][% IF art.arxiv %] ArXiv:[% art.arxiv %][% END %]
     [% END %]
 </dd>

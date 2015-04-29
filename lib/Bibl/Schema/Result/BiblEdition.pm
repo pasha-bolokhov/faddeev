@@ -42,7 +42,7 @@ __PACKAGE__->add_columns(
   "journal_id",
   { data_type => "integer", is_nullable => 0},
   "year",
-  { data_type => "integer", is_nullable => 0},
+  { data_type => "integer", is_nullable => 1},
   "issue",
   { data_type => "varchar", is_nullable => 1, size => 128 },
   "vol",
