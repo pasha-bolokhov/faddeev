@@ -40,7 +40,7 @@ __PACKAGE__->add_columns(
   "article_id",
   { data_type => "integer", is_nullable => 0},
   "journal_id",
-  { data_type => "integer", is_nullable => 0},
+  { data_type => "integer", is_nullable => 1},
   "year",
   { data_type => "integer", is_nullable => 1},
   "issue",
